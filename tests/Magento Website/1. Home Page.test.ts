@@ -1,25 +1,17 @@
 import { expect, defineConfig } from "@playwright/test";
 import { test } from "@fixtures/basePage";
-import titlePage from "@utils/genericUtils";
-
 import DefaultBarActions from "@sections/defaultBarActions.section";
 import DefaultBarDetails from "@sections/defaultBarDetails.section";
-
-// Makes variable global on this test.
-let TitlePage;
 
 test.beforeEach(async ({ page, home }) => {
   // Opens the URL defined in home.page before each test
   await home.goto();
-
-  // Creates a new instance of the TitlePage class before each test.
-  TitlePage = new titlePage(page);
 });
 
-test("Title of home page", async ({}) => {
+test("Title of home page", async ({ utils }) => {
   // Expects page to have a title with the name of "Home Page".
-  const pageTitle = await TitlePage.getTitle();
-  await expect(pageTitle).toBe("Home Page");
+  const pageTitle = await utils.getTitle();
+  expect(pageTitle).toBe("Home Page");
 });
 
 test.describe("Default bar menu", () => {
@@ -31,16 +23,16 @@ test.describe("Default bar menu", () => {
     await expect(banner).toBeVisible();
     await banner.click();
   });
-  test("Sign in button", async ({ page }) => {
+  test("Sign in button", async ({ page, utils }) => {
     // Sign in button
     const signIn = page.getByRole("link", { name: "Sign In" });
     await signIn.click();
 
     //Assert page title
-    const pageTitle = await TitlePage.getTitle();
+    const pageTitle = await utils.getTitle();
     await expect(pageTitle).toBe("Customer Login");
   });
-  test("Create an Account", async ({ page }) => {
+  test("Create an Account", async ({ page, utils }) => {
     // Create an Account
     const createAnAccount = page.getByRole("link", {
       name: "Create an Account",
@@ -48,7 +40,7 @@ test.describe("Default bar menu", () => {
     await createAnAccount.click();
 
     //Assert page title
-    const pageTitle = await TitlePage.getTitle();
+    const pageTitle = await utils.getTitle();
     await expect(pageTitle).toBe("Create New Customer Account");
   });
 });

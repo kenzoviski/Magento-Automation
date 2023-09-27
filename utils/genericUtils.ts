@@ -1,6 +1,6 @@
 import { Page, Locator } from "@playwright/test";
 
-class titlePage {
+export default class Utils {
   // Using Locator for the title element
   private titleElement: Locator;
 
@@ -13,37 +13,36 @@ class titlePage {
     // Get the inner text of the title element
     return await this.titleElement.innerText();
   }
-}
-export default titlePage;
 
-export async function navigateToMenuItem(
-  page: Page,
-  menu: string,
-  submenu?: string,
-  subsubmenu?: string
-) {
-  /*1st level*/
-  const menuItem = await page.locator(menu);
-  await menuItem.isVisible();
-  await menuItem.hover();
+  async navigateToMenuItem(
+    page: Page,
+    menu: string,
+    submenu?: string,
+    subsubmenu?: string
+  ) {
+    /*1st level*/
+    const menuItem = await page.locator(menu);
+    await menuItem.isVisible();
+    await menuItem.hover();
 
-  /*2nd level*/
-  if (submenu) {
-    const submenuItem = await page.locator(submenu);
-    await submenuItem.isVisible();
-    await submenuItem.hover();
+    /*2nd level*/
+    if (submenu) {
+      const submenuItem = await page.locator(submenu);
+      await submenuItem.isVisible();
+      await submenuItem.hover();
 
-    /*3rd level*/
-    if (subsubmenu) {
-      //Do code here to navigate to 3rd level of menu
-      const subsubmenuItem = await page.locator(subsubmenu);
-      await subsubmenuItem.isVisible();
-      await subsubmenuItem.hover();
-      await subsubmenuItem.click();
+      /*3rd level*/
+      if (subsubmenu) {
+        //Do code here to navigate to 3rd level of menu
+        const subsubmenuItem = await page.locator(subsubmenu);
+        await subsubmenuItem.isVisible();
+        await subsubmenuItem.hover();
+        await subsubmenuItem.click();
+      } else {
+        await submenuItem.click();
+      }
     } else {
-      await submenuItem.click();
+      await menuItem.click();
     }
-  } else {
-    await menuItem.click();
   }
 }
