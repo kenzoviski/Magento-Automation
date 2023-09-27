@@ -1,8 +1,6 @@
 import { Page } from "@playwright/test";
 
-// My actions (in this example click "Sign In" and click on "Create An Account")
-
-export default class DefaultBarActions {
+export default class DefaultBarDetails {
   page: Page;
 
   constructor(page: Page) {
@@ -10,14 +8,16 @@ export default class DefaultBarActions {
   }
 
   // Locators
-  buttonSignIn = () => this.page.locator("#x");
-  buttonCreateAnAccount = () => this.page.locator("#x");
+  banner = () =>
+    this.page.getByRole("banner").getByText("Default welcome msg!");
+  buttonSignIn = () => this.page.getByRole("link", { name: "Sign In" });
+  buttonCreateAnAccount = () =>
+    this.page.getByRole("link", { name: "Create an Account" });
 
   // Actions
   public async clickSignIn() {
     await this.buttonSignIn().click();
   }
-
   public async clickCreateAnAccount() {
     await this.buttonCreateAnAccount().click();
   }

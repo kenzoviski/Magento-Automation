@@ -1,11 +1,10 @@
 import { expect, defineConfig } from "@playwright/test";
 import { test } from "@fixtures/basePage";
-import DefaultBarActions from "@sections/defaultBarActions.section";
-import DefaultBarDetails from "@sections/defaultBarDetails.section";
 
 test.beforeEach(async ({ page, home }) => {
   // Opens the URL defined in home.page before each test
-  await home.goto();
+  const url = "https://magento.softwaretestingboard.com/";
+  await home.gotoHomePage(url);
 });
 
 test("Title of home page", async ({ utils }) => {
@@ -18,11 +17,9 @@ test.describe("Default bar menu", () => {
   test("Welcome message", async ({ page, home }) => {
     // Default welcome message
     await home.assertWelcomeMessage();
-
-    const banner = page.getByRole("banner").getByText("Default welcome msg!");
-    await expect(banner).toBeVisible();
-    await banner.click();
   });
+
+  // --------------------- Revamp from here
   test("Sign in button", async ({ page, utils }) => {
     // Sign in button
     const signIn = page.getByRole("link", { name: "Sign In" });
