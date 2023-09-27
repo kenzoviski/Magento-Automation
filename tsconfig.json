@@ -2,7 +2,10 @@
     "compilerOptions": {
       "baseUrl": ".", // This must be specified if "paths" is.
       "paths": {
-        "@utils/*": ["utils/*"] // This mapping is relative to "baseUrl".
+        "@utils/*": ["utils/*"], // This mapping is relative to "baseUrl".
+        "@sections/*": ["tests/support/sections/*"], // This mapping is relative to "sections".
+        "@pages/*": ["tests/support/pages/*"], // This mapping is relative to "pages".
+        "@fixtures/*": ["tests/fixtures/*"], // This mapping is relative to "fixtures".
       }
     }
   }

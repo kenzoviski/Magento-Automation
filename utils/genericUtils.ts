@@ -1,4 +1,4 @@
-import { Page, Locator, expect } from "@playwright/test";
+import { Page, Locator } from "@playwright/test";
 
 class titlePage {
   // Using Locator for the title element
@@ -27,21 +27,22 @@ export async function navigateToMenuItem(
   await menuItem.isVisible();
   await menuItem.hover();
 
-  if (submenu /*2nd level*/) {
+  /*2nd level*/
+  if (submenu) {
     const submenuItem = await page.locator(submenu);
     await submenuItem.isVisible();
-    await submenuItem.hover();    
-    if (subsubmenu /*3rd level*/) {
+    await submenuItem.hover();
+
+    /*3rd level*/
+    if (subsubmenu) {
       //Do code here to navigate to 3rd level of menu
       const subsubmenuItem = await page.locator(subsubmenu);
       await subsubmenuItem.isVisible();
       await subsubmenuItem.hover();
       await subsubmenuItem.click();
-    }
-    else {
+    } else {
       await submenuItem.click();
     }
-
   } else {
     await menuItem.click();
   }

@@ -1,6 +1,6 @@
 import { test, expect } from "@playwright/test";
-import { navigateToMenuItem } from "@utils/utils";
-import titlePage from "@utils/utils";
+import { navigateToMenuItem } from "@utils/genericUtils";
+import titlePage from "@utils/genericUtils";
 
 // Makes variable global on this test.
 let TitlePage;

@@ -28,6 +28,7 @@ export default defineConfig({
 
   use: {
     /* Base URL to use in actions like `await page.goto('/')`. */
+    //Comment this line once you have a POM (page object model) structure (currently only 1. HomePage.test.ts has)
     baseURL: "https://magento.softwaretestingboard.com/",
 
     /* Collect trace when retrying the failed test. See https://playwright.dev/docs/trace-viewer */

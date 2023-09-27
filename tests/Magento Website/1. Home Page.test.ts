@@ -1,12 +1,16 @@
-import { test, expect, defineConfig } from "@playwright/test";
-import titlePage from "@utils/utils";
+import { expect, defineConfig } from "@playwright/test";
+import { test } from "@fixtures/basePage";
+import titlePage from "@utils/genericUtils";
+
+import DefaultBarActions from "@sections/defaultBarActions.section";
+import DefaultBarDetails from "@sections/defaultBarDetails.section";
 
 // Makes variable global on this test.
 let TitlePage;
 
-test.beforeEach(async ({ page }) => {
-  // Opens the URL defined in playwright.config.ts before each test
-  await page.goto("/");
+test.beforeEach(async ({ page, home }) => {
+  // Opens the URL defined in home.page before each test
+  await home.goto();
 
   // Creates a new instance of the TitlePage class before each test.
   TitlePage = new titlePage(page);
@@ -19,17 +23,17 @@ test("Title of home page", async ({}) => {
 });
 
 test.describe("Default bar menu", () => {
-  test("Welcome message", async ({ page }) => {
+  test("Welcome message", async ({ page, home }) => {
     // Default welcome message
-    const banner = await page
-      .getByRole("banner")
-      .getByText("Default welcome msg!");
+    await home.assertWelcomeMessage();
+
+    const banner = page.getByRole("banner").getByText("Default welcome msg!");
     await expect(banner).toBeVisible();
     await banner.click();
   });
   test("Sign in button", async ({ page }) => {
     // Sign in button
-    const signIn = await page.getByRole("link", { name: "Sign In" });
+    const signIn = page.getByRole("link", { name: "Sign In" });
     await signIn.click();
 
     //Assert page title
@@ -38,7 +42,7 @@ test.describe("Default bar menu", () => {
   });
   test("Create an Account", async ({ page }) => {
     // Create an Account
-    const createAnAccount = await page.getByRole("link", {
+    const createAnAccount = page.getByRole("link", {
       name: "Create an Account",
     });
     await createAnAccount.click();
@@ -52,7 +56,7 @@ test.describe("Default bar menu", () => {
 test.describe("Logo search bar and cart icon", () => {
   test.describe.configure({ retries: 5, timeout: 10000 });
   test("Logo", async ({ page }) => {
-    const logo = await page.getByLabel("store logo");
+    const logo = page.getByLabel("store logo");
     await expect(logo).toBeVisible();
   });
 
