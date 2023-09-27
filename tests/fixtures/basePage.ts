@@ -1,6 +1,6 @@
 import { test as base } from "@playwright/test";
 import Home from "@pages/home.page";
-import Utils from "@utils/genericUtils";
+import Utils from "@utils/Utils";
 
 // Extend basic test by providing a two new fixtures (our page object pages)
 export const test = base.extend<{
