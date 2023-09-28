@@ -1,43 +1,46 @@
 import { expect, defineConfig } from "@playwright/test";
 import { test } from "@fixtures/basePage";
 
-test.beforeEach(async ({ page, home }) => {
+let pageTitle;
+
+test.beforeEach(async ({ page }) => {
   // Opens the URL defined in home.page before each test
   const url = "https://magento.softwaretestingboard.com/";
-  await home.gotoHomePage(url);
+  await page.goto(url);
 });
 
 test("Title of home page", async ({ utils }) => {
   // Expects page to have a title with the name of "Home Page".
-  const pageTitle = await utils.getTitle();
-  expect(pageTitle).toBe("Home Page");
+  pageTitle = await utils.getTitle();
+  await expect(pageTitle).toBe("Home Page");
 });
 
 test.describe("Default bar menu", () => {
-  test("Welcome message", async ({ page, home }) => {
+  test("Welcome message", async ({ home }) => {
     // Default welcome message
     await home.assertWelcomeMessage();
   });
 
-  // --------------------- Revamp from here
-  test("Sign in button", async ({ page, utils }) => {
-    // Sign in button
-    const signIn = page.getByRole("link", { name: "Sign In" });
-    await signIn.click();
+  test("Sign in button", async ({ page, utils, home }) => {
+    const url =
+      "https://magento.softwaretestingboard.com/customer/account/login/referer/aHR0cHM6Ly9tYWdlbnRvLnNvZnR3YXJldGVzdGluZ2JvYXJkLmNvbS8%2C/";
 
     //Assert page title
-    const pageTitle = await utils.getTitle();
-    await expect(pageTitle).toBe("Customer Login");
+    await expect(home.defaultBarDetails.buttonSignIn()).toBeVisible();
+    await home.clickSignIn();
+
+    //Assert the "Customer Login" page to be loaded
+    await page.waitForURL(url);
   });
-  test("Create an Account", async ({ page, utils }) => {
-    // Create an Account
-    const createAnAccount = page.getByRole("link", {
-      name: "Create an Account",
-    });
-    await createAnAccount.click();
+
+  // --------------------- Revamp from here
+  test("Create an Account", async ({ page, home, utils }) => {
+    const url =
+      "https://magento.softwaretestingboard.com/customer/account/create/";
 
     //Assert page title
-    const pageTitle = await utils.getTitle();
+    await expect(home.defaultBarDetails.buttonCreateAnAccount()).toBeVisible();
+    pageTitle = await utils.getTitle();
     await expect(pageTitle).toBe("Create New Customer Account");
   });
 });

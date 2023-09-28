@@ -13,12 +13,4 @@ export default class DefaultBarDetails {
   buttonSignIn = () => this.page.getByRole("link", { name: "Sign In" });
   buttonCreateAnAccount = () =>
     this.page.getByRole("link", { name: "Create an Account" });
-
-  // Actions
-  public async clickSignIn() {
-    await this.buttonSignIn().click();
-  }
-  public async clickCreateAnAccount() {
-    await this.buttonCreateAnAccount().click();
-  }
 }

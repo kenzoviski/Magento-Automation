@@ -1,5 +1,5 @@
 import { test as base } from "@playwright/test";
-import Home from "@pages/home.page";
+import Home from "@pages/1. Home.page";
 import Utils from "@utils/Utils";
 
 // Extend basic test by providing a two new fixtures (our page object pages)

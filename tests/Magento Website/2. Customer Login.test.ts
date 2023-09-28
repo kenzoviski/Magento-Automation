@@ -1,43 +1,48 @@
-import { test, expect } from "@playwright/test";
+import { expect } from "@playwright/test";
+import { test } from "@fixtures/basePage";
 
-test("Customer Login Page", async ({ page }) => {
-  // Opens Chromium on the URL defined in global-setup.
-  await page.goto("/");
+let pageTitle;
 
-  // Click the 'Sign In' link.
-  // const signInLocator = page.locator("body > div.page-wrapper > header > div.panel.wrapper > div > ul > li.authorization-link > a");
-  // await signInLocator.click();
-  await page.getByRole("link", { name: "Sign In" }).click(); //Locator by using the name
-
-  // Expects page to have a heading with the name of Customer Login.
-  await expect(
-    page.getByRole("heading", { name: "Customer Login" })
-  ).toBeVisible();
+test.beforeEach(async ({ page }) => {
+  // Opens the URL defined in home.page before each test
+  const url =
+    "https://magento.softwaretestingboard.com/customer/account/login/referer/aHR0cHM6Ly9tYWdlbnRvLnNvZnR3YXJldGVzdGluZ2JvYXJkLmNvbS9jdXN0b21lci9hY2NvdW50L2xvZ2luLw%2C%2C/";
+  await page.goto(url);
 });
 
-test("E-mail", async ({ page }) => {
-  // Opens Chromium on the URL defined in global-setup.
-  await page.goto("/");
-
-  // Click the 'Sign In' link.
-  await page.getByRole("link", { name: "Sign In" }).click();
-
-  // Wait for the email CSS selector input to be visible and click it.
-  const emailInput = "123@gmail.com";
-  const emailLocator = page.locator("#email");
-  await emailLocator.click();
-
-  // Type the email address.
-  await emailLocator.type(emailInput);
-
-  // Validate that the email input now contains the typed value.
-  await expect(emailLocator).toHaveValue("123@gmail.com");
+test("Title of home page", async ({ utils }) => {
+  // Expects page to have a title with the name of "Customer Login".
+  pageTitle = await utils.getTitle();
+  await expect(pageTitle).toBe("Customer Login");
 });
 
-// This only works if headless: false on playwright.config.ts. This is not meant for Playwright Runner extension (the extension always override configs)
-// test.afterEach(async ({ browser }) => {
-//   browser.close();
-// });
+test.describe("Registered Customers", () => {
+  test("Customer Login Page", async ({ page }) => {
+    // Click the 'Sign In'
+    await page.getByRole("link", { name: "Sign In" }).click(); //Locator by using the name
+
+    // Expects page to have a heading with the name of Customer Login.
+    await expect(
+      page.getByRole("heading", { name: "Customer Login" })
+    ).toBeVisible();
+  });
+
+  test("E-mail", async ({ page }) => {
+    // Click the 'Sign In' link.
+    await page.getByRole("link", { name: "Sign In" }).click();
+
+    // Wait for the email CSS selector input to be visible and click it.
+    const emailInput = "123@gmail.com";
+    const emailLocator = page.locator("#email");
+    await emailLocator.click();
+
+    // Type the email address.
+    await emailLocator.type(emailInput);
+
+    // Validate that the email input now contains the typed value.
+    await expect(emailLocator).toHaveValue("123@gmail.com");
+  });
+});
 
 // Snippets
 // await page.goto('https://magento.softwaretestingboard.com/');

@@ -1,5 +1,5 @@
 import { expect, Page } from "@playwright/test";
-import DefaultBarDetails from "@sections/homeDefaultBar.section";
+import DefaultBarDetails from "@sections/1. Home_DefaultBar.section";
 
 export default class Home {
   page: Page;
@@ -17,5 +17,13 @@ export default class Home {
   // Actions
   public async assertWelcomeMessage() {
     await expect(this.defaultBarDetails.banner()).toBeVisible();
+  }
+
+  public async clickSignIn() {
+    await this.defaultBarDetails.buttonSignIn().click();
+  }
+
+  public async clickCreateAnAccount() {
+    await this.defaultBarDetails.buttonCreateAnAccount().click();
   }
 }
