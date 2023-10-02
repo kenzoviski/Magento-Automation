@@ -1,6 +1,6 @@
 import { expect, Page } from "@playwright/test";
-import NewCustomersDetails from "@sections/2. Customer Login_NewCustomers.section";
-import RegisteredCustomers from "@sections/2. Customer Login_RegisteredCustomers.section";
+import NewCustomersDetails from "@sections/3. Customer Login_NewCustomers.section";
+import RegisteredCustomers from "@sections/3. Customer Login_RegisteredCustomers.section";
 
 export default class Home {
   page: Page;

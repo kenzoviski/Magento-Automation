@@ -1,5 +1,5 @@
 import { expect, Page } from "@playwright/test";
-import NewAccount from "@sections/3. Create New Customer Account_NewAccount.section";
+import NewAccount from "@sections/4. Create New Customer Account_NewAccount.section";
 
 export default class Home {
   page: Page;

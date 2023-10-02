@@ -1,11 +1,12 @@
 import { expect, defineConfig } from "@playwright/test";
 import { test } from "@fixtures/basePage";
 
-let pageTitle;
+let pageTitle: any;
+let url: string;
 
 test.beforeEach(async ({ page }) => {
   // Opens the URL defined in home.page before each test
-  const url = "https://magento.softwaretestingboard.com/";
+  url = "https://magento.softwaretestingboard.com/";
   await page.goto(url);
 });
 
@@ -17,61 +18,43 @@ test("Title of home page", async ({ utils }) => {
 
 test.describe("Default bar menu", () => {
   test("Welcome message", async ({ home }) => {
-    // Default welcome message
+    // Assert default welcome message
     await home.assertWelcomeMessage();
   });
 
-  test("Sign in button", async ({ page, utils, home }) => {
-    const url =
+  test("Sign in button", async ({ page, home }) => {
+    url =
       "https://magento.softwaretestingboard.com/customer/account/login/referer/aHR0cHM6Ly9tYWdlbnRvLnNvZnR3YXJldGVzdGluZ2JvYXJkLmNvbS8%2C/";
 
-    //Assert page title
-    await expect(home.defaultBarDetails.buttonSignIn()).toBeVisible();
+    // Assert SignIn button
+    await home.assertbuttonSignIn();
     await home.clickSignIn();
 
-    //Assert the "Customer Login" page to be loaded
+    // Assert the "Customer Login" page to be loaded
     await page.waitForURL(url);
   });
 
-  // --------------------- Revamp from here
-  test("Create an Account", async ({ page, home, utils }) => {
-    const url =
-      "https://magento.softwaretestingboard.com/customer/account/create/";
+  test("Create an Account", async ({ page, home }) => {
+    url = "https://magento.softwaretestingboard.com/customer/account/create/";
 
-    //Assert page title
-    await expect(home.defaultBarDetails.buttonCreateAnAccount()).toBeVisible();
-    pageTitle = await utils.getTitle();
-    await expect(pageTitle).toBe("Create New Customer Account");
+    // Assert CreateAnAccount button
+    await home.assertbuttonCreateAnAccount();
+    await home.clickCreateAnAccount();
+
+    //Assert the "Ceate an Account" page to be loaded
+    await page.waitForURL(url);
   });
 });
 
-test.describe("Logo search bar and cart icon", () => {
-  test.describe.configure({ retries: 5, timeout: 10000 });
-  test("Logo", async ({ page }) => {
-    const logo = page.getByLabel("store logo");
-    await expect(logo).toBeVisible();
+test.describe("Logo, search bar and cart icon", () => {
+  //Example of configure to be applied on a group of tests (retry 5 times with a timeout opf 5 seconds)
+  test.describe.configure({ retries: 5, timeout: 5000 });
+  test("Assertion to Logo, SearchBar and Cart icon", async ({ home }) => {
+    // Assert Logo (visibility)
+    await home.assertLogo();
+    // Assert SearchBar (placeholder with string)
+    await home.assertSearchBar();
+    // Assert Cart icon (visibility)
+    await home.assertCartIcon();
   });
-
-  test("Search bar and Cart icon", async ({ page }) => {
-    //Search bar code
-    // Wait for the element with the specified locator to become present
-    const searchBarMessageElement = await page.getByPlaceholder(
-      "Search entire store here..."
-    );
-
-    // Assert that the element is not null
-    await expect(searchBarMessageElement).not.toBeNull();
-
-    //Cart icon
-    const cartElement = await page.getByRole("link", { name: " My Cart" });
-
-    // Assert that the cart icon element is not null
-    await expect(cartElement).not.toBeNull();
-  });
-});
-
-test("Logo is visible", async ({ page }) => {
-  // Expects the home page to have the logo.
-  const pageLogo = await page.getByLabel("store logo");
-  await expect(pageLogo).toBeVisible();
 });

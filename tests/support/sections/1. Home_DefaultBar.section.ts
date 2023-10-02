@@ -13,4 +13,8 @@ export default class DefaultBarDetails {
   buttonSignIn = () => this.page.getByRole("link", { name: "Sign In" });
   buttonCreateAnAccount = () =>
     this.page.getByRole("link", { name: "Create an Account" });
+  imageLogo = () => this.page.getByLabel("store logo");
+  barSearchBar = () =>
+    this.page.getByPlaceholder("Search entire store here...");
+  iconCart = () => this.page.getByRole("link", { name: " My Cart" });
 }
