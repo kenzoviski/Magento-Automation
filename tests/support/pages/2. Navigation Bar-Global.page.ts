@@ -23,7 +23,7 @@ export default class NavigationBar {
   // Actions
 
   // Regex expression to treat locator wildcards
-  private locatorTreatment(text: string) {
+  private regexLocatorTreatment(text: string) {
     const x = this.page.getByRole("menuitem", {
       name: new RegExp(`^.*${text}$`),
     });
@@ -55,7 +55,7 @@ export default class NavigationBar {
     subMenuTexts?: string[] // Make subMenuTexts optional by using "?"
   ): Promise<void> {
     // Use getByRole with a regex to match the exact word, allowing for optional leading characters
-    const menu = this.locatorTreatment(menuText);
+    const menu = this.regexLocatorTreatment(menuText);
 
     // Hover over the menu
     await menu.hover();
@@ -66,7 +66,7 @@ export default class NavigationBar {
     // If subMenuTexts are provided, hover over the submenus
     if (subMenuTexts) {
       for (const subMenuText of subMenuTexts) {
-        const subMenu = this.locatorTreatment(subMenuText);
+        const subMenu = this.regexLocatorTreatment(subMenuText);
 
         await subMenu.hover();
         await expect(subMenu).toBeVisible();
