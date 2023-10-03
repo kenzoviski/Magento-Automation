@@ -11,6 +11,6 @@ test("Cycle through navigation bar and assert all menus submenus subsubmenus", a
   navigationBar,
   page,
 }) => {
-  // Call the function to iterate through menus
+  // Call the function to iterate through menus, submenus and subsubmenus
   await navigationBar.hoverMenus(page, navigationBar.menuTexts);
 });
