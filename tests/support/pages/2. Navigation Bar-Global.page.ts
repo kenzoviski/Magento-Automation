@@ -10,13 +10,48 @@ export default class NavigationBar {
   // Array of strings (menu/submenu/subsubmenu)
   menuTexts = [
     { menuText: "What's New", subMenuTexts: [] },
-    { menuText: "Women", subMenuTexts: ["Tops", "Bottoms"] },
-    { menuText: "Men", subMenuTexts: ["Tops", "Bottoms"] },
+    {
+      menuText: "Women",
+      subMenuTexts: [
+        {
+          subMenuText: "Tops",
+          subSubMenuTexts: [
+            "Jackets",
+            "Hoodies & Sweatshirts",
+            "Tees",
+            "Bras & Tanks",
+          ],
+        },
+        { subMenuText: "Bottoms", subSubMenuTexts: ["Pants", "Shorts"] },
+      ],
+    },
+    {
+      menuText: "Men",
+      subMenuTexts: [
+        {
+          subMenuText: "Tops",
+          subSubMenuTexts: [
+            "Jackets",
+            "Hoodies & Sweatshirts",
+            "Tees",
+            "Tanks",
+          ],
+        },
+        { subMenuText: "Bottoms", subSubMenuTexts: ["Pants", "Shorts"] },
+      ],
+    },
     {
       menuText: "Gear",
-      subMenuTexts: ["Bags", "Fitness Equipment", "Watches"],
+      subMenuTexts: [
+        { subMenuText: "Bags", subSubMenuTexts: [] },
+        { subMenuText: "Fitness Equipment", subSubMenuTexts: [] },
+        { subMenuText: "Watches", subSubMenuTexts: [] },
+      ],
     },
-    { menuText: "Training", subMenuTexts: ["Video Download"] },
+    {
+      menuText: "Training",
+      subMenuTexts: [{ subMenuText: "Video Download", subSubMenuTexts: [] }],
+    },
     { menuText: "Sale", subMenuTexts: [] },
   ];
 
@@ -35,7 +70,10 @@ export default class NavigationBar {
   // Function to iterate through an array of menu texts and hover over each
   async hoverMenus(
     page: Page,
-    menuTexts: { menuText: string; subMenuTexts: string[] }[]
+    menuTexts: {
+      menuText: string;
+      subMenuTexts: { subMenuText: string; subSubMenuTexts?: string[] }[];
+    }[]
   ): Promise<void> {
     for (const { menuText, subMenuTexts } of menuTexts) {
       if (subMenuTexts && subMenuTexts.length > 0) {
@@ -52,7 +90,7 @@ export default class NavigationBar {
   async hoverAndAssertMenu(
     page: Page,
     menuText: string,
-    subMenuTexts?: string[] // Make subMenuTexts optional by using "?"
+    subMenuTexts?: { subMenuText: string; subSubMenuTexts?: string[] }[] // Update the parameter type
   ): Promise<void> {
     // Use getByRole with a regex to match the exact word, allowing for optional leading characters
     const menu = this.regexLocatorTreatment(menuText);
@@ -65,11 +103,21 @@ export default class NavigationBar {
 
     // If subMenuTexts are provided, hover over the submenus
     if (subMenuTexts) {
-      for (const subMenuText of subMenuTexts) {
+      for (const { subMenuText, subSubMenuTexts } of subMenuTexts) {
         const subMenu = this.regexLocatorTreatment(subMenuText);
 
         await subMenu.hover();
         await expect(subMenu).toBeVisible();
+
+        // If subSubMenuTexts are provided, hover over the subsubmenus
+        if (subSubMenuTexts) {
+          for (const subSubMenuText of subSubMenuTexts) {
+            const subSubMenu = this.regexLocatorTreatment(subSubMenuText);
+
+            await subSubMenu.hover();
+            await expect(subSubMenu).toBeVisible();
+          }
+        }
       }
     }
   }
