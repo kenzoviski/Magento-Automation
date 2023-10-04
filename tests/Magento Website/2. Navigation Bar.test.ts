@@ -1,5 +1,4 @@
 import { test } from "@fixtures/basePage";
-import NavigationBarDetails from "@sections/2. Navigation Bar.section";
 
 let url: string;
 
