@@ -13,10 +13,6 @@ export default class Home {
     this.registeredCustomers = new RegisteredCustomers(this.page);
   }
 
-  public async gotoHomePage(url: string) {
-    await this.page.goto(url);
-  }
-
   // Actions
 
   //ex.
