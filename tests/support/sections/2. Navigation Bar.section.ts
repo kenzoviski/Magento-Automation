@@ -6,8 +6,9 @@ export default class NavigationBarDetails {
   constructor(page: Page) {
     this.page = page;
   }
-  // Array of menu texts
-  menuTexts = [
+
+  // Array of Menu (cycle through)
+  arrayCycleMenu = [
     { menuText: "What's New", subMenuTexts: [] },
     {
       menuText: "Women",
@@ -52,6 +53,60 @@ export default class NavigationBarDetails {
       subMenuTexts: [{ subMenuText: "Video Download" }],
     },
     { menuText: "Sale", subMenuTexts: [] },
+  ];
+
+  // Array of nested Menu
+  arrayNestedMenu = [
+    { menuText: "What's New", subMenuTexts: [{ subSubMenuTexts: [] }] },
+    {
+      menuText: "Women",
+      subMenuTexts: [
+        {
+          subMenuText: "Tops",
+          subSubMenuTexts: [
+            "Jackets",
+            "Hoodies & Sweatshirts",
+            "Tees",
+            "Bras & Tanks",
+          ],
+        },
+        { subMenuText: "Bottoms", subSubMenuTexts: ["Pants", "Shorts"] },
+      ],
+    },
+    {
+      menuText: "Men",
+      subMenuTexts: [
+        {
+          subMenuText: "Tops",
+          subSubMenuTexts: [
+            "Jackets",
+            "Hoodies & Sweatshirts",
+            "Tees",
+            "Tanks",
+          ],
+        },
+        { subMenuText: "Bottoms", subSubMenuTexts: ["Pants", "Shorts"] },
+      ],
+    },
+    {
+      menuText: "Gear",
+      subMenuTexts: [
+        { subMenuText: "Bags" },
+        { subSubMenuTexts: [] },
+        { subMenuText: "Fitness Equipment" },
+        { subSubMenuTexts: [] },
+        { subMenuText: "Watches" },
+        { subSubMenuTexts: [] },
+      ],
+    },
+    {
+      menuText: "Training",
+      subMenuTexts: [
+        { subMenuText: "Video Download" },
+        { subSubMenuTexts: [] },
+      ],
+    },
+    { menuText: "Sale", subMenuTexts: [{ subSubMenuTexts: [] }] },
   ];
 
   // URLs

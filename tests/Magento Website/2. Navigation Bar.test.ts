@@ -12,7 +12,7 @@ test("Cycle through navigation bar and assert all menus, submenus and subsubmenu
   navigationBarDetails,
 }) => {
   // Call the function to iterate automatically through all menus, submenus and subsubmenus
-  await navigationBar.assertMenusExistence(navigationBarDetails.menuTexts);
+  await navigationBar.assertMenusExistence(navigationBarDetails.arrayCycleMenu);
 });
 
 // Open page through each menu (navigation bar), submenu and subsubmenu and assert the URL
@@ -29,8 +29,17 @@ test.describe("Women menu, submenus and subsubmenus)", () => {
     await navigationBar.assertNavigationToPage("Women", "Tops");
   });
 
-  test("Menu Women->Tops->Jackets", async ({ navigationBar }) => {
+  test("Menu Women->Tops->Jackets", async ({
+    navigationBar,
+    navigationBarDetails,
+  }) => {
     await navigationBar.assertNavigationToPage("Women", "Tops", "Jackets");
+    //Example using a nested array to specify the position of "Jackets"
+    // await navigationBar.assertNavigationToPage(
+    //   navigationBarDetails.arrayNestedMenu[1].menuText,
+    //   navigationBarDetails.arrayNestedMenu[1].subMenuTexts[0].subMenuText,
+    //   navigationBarDetails.arrayNestedMenu[1].subMenuTexts[0].subSubMenuTexts[0]
+    // );
   });
 
   test("Menu Women->Tops->Hoodies & Sweatshirts", async ({ navigationBar }) => {
