@@ -55,7 +55,7 @@ export default class NavigationBarDetails {
     { menuText: "Sale", subMenuTexts: [] },
   ];
 
-  // Array of nested Menu
+  // Array of nested Menu (to use specific position of menus. Just another approach)
   arrayNestedMenu = [
     { menuText: "What's New", subMenuTexts: [{ subSubMenuTexts: [] }] },
     {
