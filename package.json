@@ -11,5 +11,8 @@
     "@playwright/test": "^1.37.1",
     "prettier": "^3.0.3",
     "typescript": "^5.2.2"
+  },
+  "dependencies": {
+    "playwright": "^1.38.1"
   }
 }
