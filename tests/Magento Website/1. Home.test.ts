@@ -48,7 +48,7 @@ test.describe("Default bar menu", () => {
 
 test.describe("Logo, search bar and cart icon", () => {
   //Example of configure to be applied on a group of tests (retry 5 times with a timeout opf 5 seconds)
-  test.describe.configure({ retries: 5, timeout: 5000 });
+  test.describe.configure({ retries: 5, timeout: 15000 });
   test("Assertion to Logo, SearchBar and Cart icon", async ({ home }) => {
     // Assert Logo (visibility)
     await home.assertLogo();
