@@ -133,7 +133,7 @@ export default class NavigationBarDetails {
       Bottoms: this.urlMain + "men/bottoms-men.html",
     },
     Gear: {
-      Bags: this.urlMain + "gear.html",
+      Bags: this.urlMain + "gear/bags.html",
       "Fitness Equipment": this.urlMain + "gear/fitness-equipment.html",
       Watches: this.urlMain + "gear/watches.html",
     },
