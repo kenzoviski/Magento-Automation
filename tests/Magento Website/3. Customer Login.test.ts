@@ -17,14 +17,10 @@ test("Title of home page", async ({ utils }) => {
 });
 
 test.describe("Registered Customers", () => {
-  test("Customer Login Page", async ({ page }) => {
+  test("Customer Login Page", async ({ customers }) => {
     // Click the 'Sign In'
-    await page.getByRole("link", { name: "Sign In" }).click(); //Locator by using the name
-
-    // Expects page to have a heading with the name of Customer Login.
-    await expect(
-      page.getByRole("heading", { name: "Customer Login" })
-    ).toBeVisible();
+    customers.signIn();
+    customers.assertSignIn();
   });
 
   test("E-mail", async ({ page }) => {

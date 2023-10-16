@@ -2,7 +2,7 @@ import { expect, Page } from "@playwright/test";
 import NewCustomersDetails from "@sections/3. Customer Login_NewCustomers.section";
 import RegisteredCustomers from "@sections/3. Customer Login_RegisteredCustomers.section";
 
-export default class Home {
+export default class Customers {
   page: Page;
   newCustomersDetails: NewCustomersDetails;
   registeredCustomers: RegisteredCustomers;
@@ -15,12 +15,16 @@ export default class Home {
 
   // Actions
 
-  //ex.
-  // public async assertWelcomeMessage() {
-  //   await expect(this.defaultBarDetails.banner()).toBeVisible();
-  // }
+  public async signIn() {
+    await this.registeredCustomers.linkSignIn().click();
+    await this.registeredCustomers.labelEmail().fill("layola4512@elixirsd.com");
+    await this.registeredCustomers.labelPassword().fill("Kenzopila86");
+    await this.registeredCustomers.buttonSignIn().click();
+  }
 
-  // public async clickSignIn() {
-  //   await this.defaultBarDetails.buttonSignIn().click();
-  // }
+  public async assertSignIn() {
+    await expect(this.registeredCustomers.roleBanner()).toBeVisible({
+      timeout: 15000, // Wait 15sec for visibility of the banner (sometimes page takes longer to load)
+    });
+  }
 }
