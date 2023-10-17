@@ -17,7 +17,7 @@ export default class Customers {
 
   public async signIn() {
     const email = "layola4512@elixirsd.com";
-    const password = "Kenzopila86";
+    const password = "Magento1986";
 
     await this.registeredCustomers.linkSignIn().click();
     await this.registeredCustomers.labelEmail().click();
