@@ -19,26 +19,6 @@ test("Title of home page", async ({ utils, context }) => {
 
 test.describe("Registered Customers", () => {
   test("Customer Login Page", async ({ page, customers }) => {
-    // Click the 'Sign In'
-    // await page.getByRole("link", { name: "Sign In" }).click();
-    // await page.getByLabel("Email", { exact: true }).click();
-    // await page
-    //   .getByLabel("Email", { exact: true })
-    //   .fill("layola4512@elixirsd.com");
-    // await page.getByLabel("Password").click();
-    // await page.getByLabel("Password").fill("Kenzopila86");
-    // await page.getByRole("button", { name: "Sign In" }).click();
-    // await expect(
-    //   page.getByRole("banner").getByText("Welcome, Test Mage QA!")
-    // ).toBeVisible();
-    // await page
-    //   .getByRole("banner")
-    //   .locator("button")
-    //   .filter({ hasText: "Change" })
-    //   .click();
-    // await page.getByRole("link", { name: "Sign Out" }).click();
-    // await expect(page.getByText("You are signed out")).toBeVisible();
-
     await customers.signIn();
     await customers.assertSignIn();
   });
