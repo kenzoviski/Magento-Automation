@@ -10,14 +10,14 @@ test.beforeEach(async ({ page, context }) => {
   await page.goto(url);
 });
 
-test("Title of page", async ({ utils, context }) => {
+test("Title of home page", async ({ utils, context }) => {
   // Expects page to have a title with the name of "Forgot Your Password".
   pageTitle = await utils.getTitle();
   await expect(pageTitle).toBe("Forgot Your Password?");
 });
 
-test.describe("Forgot Your Password", () => {
-  test("Forgot Your Password Page", async ({ forgotYourPassword }) => {
+test.describe("Forgot Your Password Page", () => {
+  test("Forgot Your Password Section", async ({ forgotYourPassword }) => {
     await forgotYourPassword.assertReserMyPasswordSection();
   });
 });
