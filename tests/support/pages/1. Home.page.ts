@@ -11,7 +11,6 @@ export default class Home {
   }
 
   // Actions
-  // Clicks
   public async clickSignIn() {
     await this.defaultBarDetails.buttonSignIn().click();
   }

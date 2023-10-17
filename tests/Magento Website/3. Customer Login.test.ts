@@ -4,7 +4,6 @@ import { test } from "@fixtures/basePage";
 let pageTitle;
 
 test.beforeEach(async ({ page, context }) => {
-  // Opens the URL defined in home.page before each test
   const url =
     "https://magento.softwaretestingboard.com/customer/account/login/referer/aHR0cHM6Ly9tYWdlbnRvLnNvZnR3YXJldGVzdGluZ2JvYXJkLmNvbS9jdXN0b21lci9hY2NvdW50L2xvZ2luLw%2C%2C/";
   await context.clearCookies();
@@ -17,9 +16,18 @@ test("Title of home page", async ({ utils, context }) => {
   await expect(pageTitle).toBe("Customer Login");
 });
 
-test.describe("Registered Customers", () => {
-  test("Customer Login Page", async ({ page, customers }) => {
+test.describe("Customer Login Page", () => {
+  test("Customer Login Section", async ({ customers }) => {
+    await customers.assertCustomerLoginSection();
+    await customers.assertNewCustomersSection();
+  });
+
+  test("Customer Login SignIn", async ({ customers }) => {
     await customers.signIn();
-    await customers.assertSignIn();
+    await customers.assertSignedIn();
+  });
+
+  test("Forgot Your Password navigation", async ({ customers }) => {
+    await customers.assertForgotYourPasswordNavigation();
   });
 });
