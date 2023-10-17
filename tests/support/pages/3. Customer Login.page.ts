@@ -28,8 +28,6 @@ export default class Customers {
   }
 
   public async assertSignIn() {
-    await expect(
-      this.page.getByRole("banner").getByText("Welcome, Test Mage QA!")
-    ).toBeVisible();
+    await expect(this.registeredCustomers.roleBanner()).toBeVisible();
   }
 }
