@@ -1,7 +1,8 @@
 import { test, expect } from "@playwright/test";
 
-test.beforeEach(async ({ page }) => {
+test.beforeEach(async ({ page, context }) => {
   // Opens the URL defined in playwright.config.ts before each test
+  await context.clearCookies();
   await page.goto("/");
 });
 

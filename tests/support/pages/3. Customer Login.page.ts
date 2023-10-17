@@ -16,15 +16,20 @@ export default class Customers {
   // Actions
 
   public async signIn() {
+    const email = "layola4512@elixirsd.com";
+    const password = "Kenzopila86";
+
     await this.registeredCustomers.linkSignIn().click();
-    await this.registeredCustomers.labelEmail().fill("layola4512@elixirsd.com");
-    await this.registeredCustomers.labelPassword().fill("Kenzopila86");
+    await this.registeredCustomers.labelEmail().click();
+    await this.registeredCustomers.labelEmail().fill(email);
+    await this.registeredCustomers.labelPassword().click();
+    await this.registeredCustomers.labelPassword().fill(password);
     await this.registeredCustomers.buttonSignIn().click();
   }
 
   public async assertSignIn() {
-    await expect(this.registeredCustomers.roleBanner()).toBeVisible({
-      timeout: 15000, // Wait 15sec for visibility of the banner (sometimes page takes longer to load)
-    });
+    await expect(
+      this.page.getByRole("banner").getByText("Welcome, Test Mage QA!")
+    ).toBeVisible();
   }
 }

@@ -2,8 +2,9 @@ import { test } from "@fixtures/basePage";
 
 let url: string;
 
-test.beforeEach(async ({ page }) => {
+test.beforeEach(async ({ page, context }) => {
   url = "https://magento.softwaretestingboard.com/";
+  await context.clearCookies();
   await page.goto(url);
 });
 

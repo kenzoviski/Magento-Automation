@@ -1,0 +1,18 @@
+Run Playwright recorder:
+npx playwright codegen --channel=chrome
+
+---------------
+
+Run specific test through console:
+npx playwright test <test-file>
+
+Example:
+npx playwright test "4. Create New Customer Account.test.ts" --debug
+
+Suffixes:
+--headed - to run the browser in headed mode (visible browser window) 
+--headless - for headless mode (no visible browser window)
+--debug - to enter debug mode
+
+---------------
+

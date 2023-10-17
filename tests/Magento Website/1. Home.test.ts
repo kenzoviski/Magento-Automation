@@ -4,9 +4,10 @@ import { test } from "@fixtures/basePage";
 let pageTitle: any;
 let url: string;
 
-test.beforeEach(async ({ page }) => {
+test.beforeEach(async ({ page, context }) => {
   // Opens the URL defined in home.page before each test
   url = "https://magento.softwaretestingboard.com/";
+  await context.clearCookies();
   await page.goto(url);
 });
 
