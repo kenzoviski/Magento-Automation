@@ -5,6 +5,7 @@ import NavigationBarDetails from "@sections/2. Navigation Bar.section";
 import Utils from "@utils/Utils";
 import Customers from "@pages/3. Customer Login.page";
 import ForgotYourPassword from "@pages/4. Forgot Your Password.page";
+import CreateNewAccount from "@pages/5. Create New Customer Account.page";
 
 // Extend basic test by providing a two new fixtures (our page object pages)
 export const test = base.extend<{
@@ -14,6 +15,7 @@ export const test = base.extend<{
   utils: Utils;
   customers: Customers;
   forgotYourPassword: ForgotYourPassword;
+  createNewAccount: CreateNewAccount;
 }>({
   // Define a fixture. Note that it can use built-in fixture "page"
   home: async ({ page }, use) => {
@@ -33,5 +35,8 @@ export const test = base.extend<{
   },
   forgotYourPassword: async ({ page }, use) => {
     await use(new ForgotYourPassword(page));
+  },
+  createNewAccount: async ({ page }, use) => {
+    await use(new CreateNewAccount(page));
   },
 });

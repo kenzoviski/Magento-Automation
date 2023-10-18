@@ -20,4 +20,10 @@ test.describe("Forgot Your Password Page", () => {
   test("Forgot Your Password Section", async ({ forgotYourPassword }) => {
     await forgotYourPassword.assertReserMyPasswordSection();
   });
+
+  test("Reset my password", async ({ forgotYourPassword }) => {
+    const email = "layola4512@elixirsd.com";
+    await forgotYourPassword.resetMyPassword(email);
+    await forgotYourPassword.assertResetMyPassword(email);
+  });
 });

@@ -16,3 +16,11 @@ test("Title of home page", async ({ utils }) => {
   pageTitle = await utils.getTitle();
   await expect(pageTitle).toBe("Create New Customer Account");
 });
+
+test.describe("Create New Customer Account Page", () => {
+  test("Create New Customer Account Section", async ({ createNewAccount }) => {
+    await createNewAccount.assertCreateNewAccountSection();
+  });
+
+  test("X", async ({ createNewAccount }) => {});
+});
