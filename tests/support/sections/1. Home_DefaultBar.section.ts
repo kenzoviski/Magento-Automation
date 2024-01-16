@@ -9,7 +9,11 @@ export default class DefaultBarDetails {
 
   // Locators
   banner = () =>
-    this.page.getByRole("banner").getByText("Default welcome msg!");
+    this.page
+      .getByRole("banner")
+      .getByText(
+        "Click “Write for us” link in the footer to submit a guest post"
+      );
   buttonSignIn = () => this.page.getByRole("link", { name: "Sign In" });
   buttonCreateAnAccount = () =>
     this.page.getByRole("link", { name: "Create an Account" });
