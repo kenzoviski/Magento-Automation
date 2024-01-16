@@ -8,6 +8,7 @@ async function globalSetup(config: FullConfig) {
   const page = await browser.newPage();
 
   try {
+    //trace to zip
     await context.tracing.start({ screenshots: true, snapshots: true });
     await page.goto(baseURL!);
     await context.tracing.stop({
