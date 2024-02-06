@@ -11,7 +11,9 @@ import { defineConfig, devices } from "@playwright/test";
  */
 export default defineConfig({
   //globalSetup is a group of steps that perform every time before a test.
-  globalSetup: "./authSetup",
+  globalSetup:
+    "./authSetup" /* This is being executed on every single test, although it's not need because I use "await context.clearCookies();" 
+  so it really doesn't have any effect */,
   testDir: "./tests",
   /* Run tests in files in parallel */
   fullyParallel: true,
