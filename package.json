@@ -13,6 +13,7 @@
     "typescript": "^5.2.2"
   },
   "dependencies": {
+    "faker": "^5.5.3",
     "playwright": "^1.38.1"
   }
 }

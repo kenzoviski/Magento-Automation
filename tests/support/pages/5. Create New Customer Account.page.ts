@@ -11,6 +11,20 @@ export default class CreateNewAccount {
   }
 
   // Actions
+  public async createNewAccount(
+    firstName: string,
+    lastName: string,
+    email: string,
+    password: string
+  ) {
+    await this.newAccount.textboxFirstName().fill(firstName);
+    await this.newAccount.textboxLastName().fill(lastName);
+    await this.newAccount.textboxEmail().fill(email);
+    await this.newAccount.textboxPassword().fill(password);
+    await this.newAccount.textboxConfirmPassword().fill(password);
+    await this.newAccount.buttonCreateAnAccount().click();
+  }
+
   public async assertCreateNewAccountSection() {
     await expect(
       this.newAccount.headerCreateNewCustomerAccount()
@@ -29,5 +43,9 @@ export default class CreateNewAccount {
     await expect(this.newAccount.textPasswordStrength()).toBeVisible();
     await expect(this.newAccount.textboxConfirmPassword()).toBeVisible();
     await expect(this.newAccount.buttonCreateAnAccount()).toBeVisible();
+  }
+
+  public async assertCreateNewAccountSuccess() {
+    await expect(this.newAccount.textMessageNewAccount()).toBeVisible();
   }
 }

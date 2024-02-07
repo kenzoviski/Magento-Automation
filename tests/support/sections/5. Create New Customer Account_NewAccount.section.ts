@@ -28,4 +28,6 @@ export default class NewAccount {
   textboxConfirmPassword = () => this.page.getByLabel("Confirm Password");
   buttonCreateAnAccount = () =>
     this.page.getByRole("button", { name: "Create an Account" });
+  textMessageNewAccount = () =>
+    this.page.getByText("Thank you for registering with Main Website Store.");
 }
