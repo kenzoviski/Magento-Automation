@@ -5,4 +5,6 @@ test.beforeEach(async ({ page, context }) => {
   await page.goto("/");
 });
 
-test("X", async ({ page }) => {});
+test.describe("Purchase page", () => {
+  test("X", async ({ page }) => {});
+});
