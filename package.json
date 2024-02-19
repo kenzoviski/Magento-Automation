@@ -8,12 +8,11 @@
   "author": "",
   "license": "ISC",
   "devDependencies": {
-    "@playwright/test": "^1.37.1",
-    "prettier": "^3.0.3",
-    "typescript": "^5.2.2"
+    "@playwright/test": "^1.41.2",
+    "prettier": "^3.0.3"
   },
   "dependencies": {
-    "faker": "^5.5.3",
-    "playwright": "^1.41.2"
+    "@types/node": "^20.11.19",
+    "faker": "^5.5.3"
   }
 }
