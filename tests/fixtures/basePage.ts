@@ -8,7 +8,7 @@ import ForgotYourPassword from "@pages/4. Forgot Your Password.page";
 import CreateNewAccount from "@pages/5. Create New Customer Account.page";
 import SearchPage from "@pages/6. SearchPage.page";
 
-// Extend basic test by providing a two new fixtures (our page object pages)
+// Extend basic test by providing new fixtures (our page object pages)
 export const test = base.extend<{
   home: Home;
   navigationBar: NavigationBar;
